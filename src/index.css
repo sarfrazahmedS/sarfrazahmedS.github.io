@@ -1,0 +1,179 @@
+:root {
+  /* ---- Deep-ink surface ---- */
+  --bg: #05080a;
+  --bg-2: #070e11;
+  --bg-3: #0a1418;
+
+  /* ---- Glass ---- */
+  --glass: rgba(255, 255, 255, 0.045);
+  --glass-2: rgba(255, 255, 255, 0.028);
+  --glass-brd: rgba(255, 255, 255, 0.09);
+  --glass-brd-strong: rgba(255, 255, 255, 0.16);
+
+  /* ---- Emerald / teal accents ---- */
+  --emerald: #3b82f6;
+  --emerald-dark: #2563eb;
+  --teal: #38bdf8;
+  --teal-bright: #7dd3fc;
+  --cyan: #60a5fa;
+  --accent: var(--emerald);
+  --accent-2: var(--teal);
+  --glow: rgba(56, 189, 248, 0.55);
+  --glow-soft: rgba(59, 130, 246, 0.22);
+
+  /* ---- Ivory type ---- */
+  --text: #eef3f1;
+  --text-muted: #9aa6bd;
+  --text-dim: #6b7789;
+
+  /* ---- Shape & depth ---- */
+  --radius: 16px;
+  --radius-sm: 11px;
+  --radius-lg: 24px;
+  --container: 1140px;
+  --nav-h: 68px;
+  --shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.75);
+  --shadow-glow: 0 0 0 1px var(--glass-brd), 0 22px 60px -22px rgba(0, 0, 0, 0.85);
+
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
+
+  color-scheme: dark;
+  font-family: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 18px);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  position: relative;
+  overflow-x: clip;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-head);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.28);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- Reusable utilities ---- */
+
+.gradient-text {
+  background: linear-gradient(100deg, var(--teal-bright) 0%, var(--emerald) 55%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: linear-gradient(160deg, var(--glass) 0%, var(--glass-2) 100%);
+  border: 1px solid var(--glass-brd);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ---- Scroll reveal ---- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Skip link ---- */
+
+.skip-link {
+  position: fixed;
+  top: -60px;
+  left: 16px;
+  z-index: 200;
+  padding: 10px 16px;
+  background: var(--emerald);
+  color: #061225;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
