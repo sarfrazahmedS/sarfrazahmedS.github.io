@@ -27,19 +27,34 @@ function ProjectCard({ project }) {
               <LockIcon /> Client work
             </span>
           )}
-          {project.repo && (
-            <a
-              className="project-repo"
-              href={project.repo}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="View source code on GitHub"
-            >
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
-                <path d={siGithub.path} />
-              </svg>
-              Code
-            </a>
+          {(project.demo || project.repo) && (
+            <div className="project-links">
+              {project.demo && (
+                <a
+                  className="project-demo"
+                  href={project.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open the live demo"
+                >
+                  <PlayIcon /> Live Demo
+                </a>
+              )}
+              {project.repo && (
+                <a
+                  className="project-repo"
+                  href={project.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="View source code on GitHub"
+                >
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+                    <path d={siGithub.path} />
+                  </svg>
+                  Code
+                </a>
+              )}
+            </div>
           )}
         </div>
         <h3 className="project-title">{project.title}</h3>
@@ -97,6 +112,14 @@ function CodeIcon() {
   return (
     <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="m8 8-4 4 4 4M16 8l4 4-4 4M13 6l-2 12" />
+    </svg>
+  );
+}
+
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor" aria-hidden="true">
+      <path d="M7 5v14l12-7z" />
     </svg>
   );
 }

@@ -87,6 +87,7 @@ export const projects = [
     title: "Full-Stack Authentication System",
     watermark: "AUTH",
     repo: "https://github.com/sarfrazahmedS/fullstack-auth-system",
+    demo: "https://sarfrazahmeds.github.io/fullstack-auth-system/",
     tags: ["TypeScript", "Node.js", "Express", "PostgreSQL", "React", "JWT"],
     description:
       "An open-source, production-style auth system: a typed REST API (Express + Prisma) with JWT access + rotating refresh tokens in httpOnly cookies, role-based access control, Zod validation and rate-limiting — plus a React client with protected routes and silent token refresh. Dockerised, with a CI pipeline.",
