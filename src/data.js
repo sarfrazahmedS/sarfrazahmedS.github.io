@@ -84,6 +84,14 @@ export const experience = [
 
 export const projects = [
   {
+    title: "Full-Stack Authentication System",
+    watermark: "AUTH",
+    repo: "https://github.com/sarfrazahmedS/fullstack-auth-system",
+    tags: ["TypeScript", "Node.js", "Express", "PostgreSQL", "React", "JWT"],
+    description:
+      "An open-source, production-style auth system: a typed REST API (Express + Prisma) with JWT access + rotating refresh tokens in httpOnly cookies, role-based access control, Zod validation and rate-limiting — plus a React client with protected routes and silent token refresh. Dockerised, with a CI pipeline.",
+  },
+  {
     title: "Healthcare Data Integration Bot",
     watermark: "ECW",
     tags: ["Python", "Node.js", "PostgreSQL", "Docker"],
@@ -107,7 +115,7 @@ export const projects = [
 ];
 
 export const projectsNote =
-  "These projects are part of ongoing employer client work at niXaam LLC. Source code is proprietary and not published — the summaries above use permission-safe, non-confidential descriptions.";
+  "An open-source project (full source on GitHub) alongside permission-safe summaries of proprietary healthcare work at niXaam LLC — client source is not published.";
 
 export const softSkills = ["Problem Solving", "Teamwork & Collaboration", "Communication", "Quick Learner"];
 

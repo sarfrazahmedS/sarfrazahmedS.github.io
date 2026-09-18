@@ -1,3 +1,4 @@
+import { siGithub } from "simple-icons";
 import { projects, projectsNote } from "../data.js";
 import { TechIcon, techTitle, techHex } from "../lib/techIcons.jsx";
 import { useTilt } from "../lib/hooks.js";
@@ -5,6 +6,8 @@ import Reveal from "./Reveal.jsx";
 
 function ProjectCard({ project }) {
   const tilt = useTilt({ max: 6 });
+  const isOpen = Boolean(project.repo);
+
   return (
     <article className="project-card glass" {...tilt}>
       <span className="project-sheen" aria-hidden="true" />
@@ -15,9 +18,29 @@ function ProjectCard({ project }) {
       )}
       <div className="project-body">
         <div className="project-top">
-          <span className="project-badge" title="Proprietary client work">
-            <LockIcon /> Client work
-          </span>
+          {isOpen ? (
+            <span className="project-badge open" title="Open-source project">
+              <CodeIcon /> Open source
+            </span>
+          ) : (
+            <span className="project-badge" title="Proprietary client work">
+              <LockIcon /> Client work
+            </span>
+          )}
+          {project.repo && (
+            <a
+              className="project-repo"
+              href={project.repo}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View source code on GitHub"
+            >
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+                <path d={siGithub.path} />
+              </svg>
+              Code
+            </a>
+          )}
         </div>
         <h3 className="project-title">{project.title}</h3>
         <p className="project-desc">{project.description}</p>
@@ -66,6 +89,14 @@ function LockIcon() {
     <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="5" y="11" width="14" height="9" rx="2" />
       <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+    </svg>
+  );
+}
+
+function CodeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m8 8-4 4 4 4M16 8l4 4-4 4M13 6l-2 12" />
     </svg>
   );
 }
