@@ -28,10 +28,22 @@ export default function Contact() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (NOT_CONFIGURED) return;
-
     const form = e.target;
     const data = new FormData(form);
+
+    // Until Formspree is configured, fall back to the visitor's email client (pre-filled).
+    if (NOT_CONFIGURED) {
+      const name = (data.get("name") || "").toString();
+      const email = (data.get("email") || "").toString();
+      const message = (data.get("message") || "").toString();
+      const subject = encodeURIComponent(`Portfolio enquiry — ${name}`);
+      const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+      window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+      setStatus("sent");
+      form.reset();
+      return;
+    }
+
     setStatus("sending");
 
     try {
@@ -79,12 +91,6 @@ export default function Contact() {
                 <textarea name="message" rows="4" required />
               </label>
 
-              {NOT_CONFIGURED && (
-                <p className="form-warning">
-                  The form isn&apos;t connected yet — add your Formspree ID in{" "}
-                  <code>src/data.js</code> to enable it. Meanwhile, use the direct links.
-                </p>
-              )}
               {status === "sent" && (
                 <p className="form-success">Thanks — your message was sent!</p>
               )}
@@ -95,7 +101,7 @@ export default function Contact() {
               <button
                 className="btn btn-primary btn-block"
                 type="submit"
-                disabled={NOT_CONFIGURED || status === "sending"}
+                disabled={status === "sending"}
               >
                 {status === "sending" ? "Sending…" : "Send message"}
               </button>
